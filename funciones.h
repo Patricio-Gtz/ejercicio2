@@ -8,7 +8,7 @@
 #include <math.h>
 
 // Prototipos de funciones
-double serie(int repet);
+double serie(int grados, int iter);
 double factorial(int fac);
 
 /**
@@ -16,33 +16,20 @@ double factorial(int fac);
  * @param   int repet [numero de iteraciones elegidas por el usuario]
  * @return [0 si hay error, total si todo sale bien]
  */
-double serie(int repet) {
+double serie(int grados, int iter) {
 
-  FILE *file = fopen("result.txt", "w");
-
-  int grados = 360;
-  double radianes = 0;
-  double fac = 0;
-  double total = 0;
+  double radianes = 0, fac = 0, total = 0;
   int i = 0;
 
-  if(!file) {
-    printf("Error en el archivo...");
-    return 0;
-  }
+  radianes = (grados * M_PI) / 180;
 
-  // Conversion de grado a radianes
-  radianes = ((grados * M_PI) / 180);
-
-  for(i = 0; i <= repet; i++) {
+  for(i = 0; i <= iter; i++) {
     // Calcula factorial
     fac = factorial(2 * i + 1);
     // Total del resultado
     total += (pow(-1, i) * (pow(radianes, (2 * i) + 1) / fac));
-    fprintf(file, "%d\t%f\n", i, total);
+    //fprintf(file, "%d\t%f\n", i, total);
   }
-
-  fclose(file);
 
   return total;
 }

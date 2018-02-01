@@ -9,7 +9,7 @@
 
 // Prototipos de funciones
 extern double factorial(int fac);
-extern double serie(int repet);
+extern double serie(int grados, int iter);
 
 /*
  * Recibe los datos desde terminal
@@ -20,16 +20,31 @@ extern double serie(int repet);
  */
 int main(int argc, char const *argv[]) {
 
-  int num;
+  int num = 360, iteraciones, i = 0;
+  double seno = 0;
+
+  FILE *file = fopen("result.dat", "w");
+
+  // Verifica si el archivo esta disponible
+  if(!file) {
+    printf("Error en el archivo...");
+    return 0;
+  }
 
   // Solo deja recibir un numero
-  if(argc > 2) {
+  if(argc > 3) {
     printf("Demasiados argumentos...\n");
   } else {
     // Convierte en numero ingresado de un char a un int
-    sscanf(argv[1], "%d", &num);
-    serie(num);
+    sscanf(argv[1], "%d", &iteraciones);
+    // Itera 360 grados
+    for (i = 0; i <= num; i++) {
+      seno = serie(i, iteraciones);
+      fprintf(file, "%d\t%f\n", i, seno);
+    }
   }
+
+  fclose(file);
 
   return 0;
 }
