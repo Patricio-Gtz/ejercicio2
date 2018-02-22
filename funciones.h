@@ -28,7 +28,6 @@ double serie(int grados, int iter) {
     fac = factorial(2 * i + 1);
     // Total del resultado
     total += (pow(-1, i) * (pow(radianes, (2 * i) + 1) / fac));
-    //fprintf(file, "%d\t%f\n", i, total);
   }
 
   return total;

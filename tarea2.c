@@ -22,15 +22,15 @@ int main(int argc, char const *argv[]) {
 
   int num = 360, iteraciones, i = 0;
   double seno = 0;
+  double funcionSin = 0;
 
   FILE *file = fopen("result.dat", "w");
-
+  FILE *file2 = fopen("resultSin.dat", "w");
   // Verifica si el archivo esta disponible
   if(!file) {
     printf("Error en el archivo...");
     return 0;
   }
-
   // Solo deja recibir un numero
   if(argc > 3) {
     printf("Demasiados argumentos...\n");
@@ -41,10 +41,14 @@ int main(int argc, char const *argv[]) {
     for (i = 0; i <= num; i++) {
       seno = serie(i, iteraciones);
       fprintf(file, "%d\t%f\n", i, seno);
+      // Lo hace por medio de la funcion sin de math.h
+      funcionSin = sin((i*M_PI)/180);
+      fprintf(file2, "%d\t%f\n", i, funcionSin);
     }
   }
 
   fclose(file);
+  fclose(file2);
 
   return 0;
 }
